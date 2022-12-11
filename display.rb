@@ -11,6 +11,12 @@ module Display
     end
 
     def displayRules
-        puts "Enter a number corresponding to an available space on the board"
+        puts
+        puts "<Enter a number corresponding to an available space on the board>"
+    end
+
+    def displayTie
+        puts
+        puts "It's a tie! Nobody won."
     end
 end

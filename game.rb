@@ -26,21 +26,29 @@ class Game
         @p2 = player2
         @gameOver = false
         @winner = false
+        @@currentPlayer = @p1
     end
 
     def play
         displayRules
         displayPlayers(@p1.player, @p2.player)
         puts
-        currentPlayer = @p1
+        displayBoard(@@board_spaces)
         
-        until gameOver
-            displayBoard(@@board_spaces)
-            puts "#{currentPlayer.player}'s turn"
+        until @gameOver
+            puts
+            puts "#{@@currentPlayer.player}'s turn: "
             move = checkMove(getMove)
-            @@board_spaces[move.to_i] =  currentPlayer == @p1 ? 'X' : 'O'
-            
-            @gameOver = true
+            @@board_spaces[move.to_i] =  @@currentPlayer == @p1 ? 'X' : 'O'
+            displayBoard(@@board_spaces)
+            if @@currentPlayer == @p1
+                @@p1_choices.push(move.to_i)
+            else
+                @@p2_choices.push(move.to_i)
+            end
+            checkWinner
+            checkTie
+            @@currentPlayer = @@currentPlayer == @p1 ? @p2 : @p1
         end
     end
 
@@ -55,7 +63,23 @@ class Game
         else
             puts "You did not enter an open space on the board"
             puts "Please try again."
-            getMove
         end
+    end
+
+    def checkTie
+        if @@available_spaces.empty?
+            @gameOver = true
+            displayTie
+        end
+    end
+
+    def checkWinner
+        winning_combos = [
+            [1, 2, 3],
+            [4, 5, 6],
+            [7, 8, 9],
+            [1, 5, 9],
+            [3, 5, 7]
+        ]
     end
 end

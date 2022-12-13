@@ -19,4 +19,9 @@ module Display
         puts
         puts "It's a tie! Nobody won."
     end
+
+    def displayWinner(player)
+        puts
+        puts "#{player} won!"
+    end
 end

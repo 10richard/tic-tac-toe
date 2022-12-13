@@ -1,6 +1,11 @@
 class Player
     attr_accessor :player
-    def initialize(name)
-        @player = name
+
+    @@count = 1
+
+    def initialize
+        puts "Player #{@@count} name:"
+        @player = gets.chomp
+        @@count += 1
     end
 end

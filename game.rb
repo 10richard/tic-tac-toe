@@ -55,8 +55,10 @@ class Game
             @@move = false
             @@currentPlayer = @@currentPlayer == @p1 ? @p2 : @p1
         end
-        if @winner = true
-            displayWinner(@@currentPlayer.player)
+        if @winner == @p1
+            displayWinner(@p1.player)
+        elsif @winner == @p2
+            displayWinner(@p2.player)
         end
     end
 
@@ -99,7 +101,7 @@ class Game
                 match = @@p1_choices & lst
                 if match == lst
                     @gameOver = true
-                    @winner = true
+                    @winner = @p1
                 end
             end
         else
@@ -108,7 +110,7 @@ class Game
                 match = @@p2_choices & lst
                 if match == lst
                     @gameOver = true
-                    @winner = true
+                    @winner = @p2
                 end
             end
         end

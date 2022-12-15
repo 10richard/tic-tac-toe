@@ -52,7 +52,6 @@ class Game
             end
             @@move = false
             checkWinner
-            checkTie
             @@currentPlayer = @@currentPlayer == @p1 ? @p2 : @p1
         end
         if @winner == @p1
@@ -104,7 +103,7 @@ class Game
                     @winner = @p1
                 end
             end
-        else
+        elsif @@currentPlayer == @p1
             @@p2_choices = @@p2_choices.sort
             winning_combos.each do |lst|
                 match = @@p2_choices & lst
@@ -113,6 +112,8 @@ class Game
                     @winner = @p2
                 end
             end
+        else
+            checkTie
         end
     end
 end

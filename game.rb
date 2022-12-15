@@ -50,9 +50,9 @@ class Game
             else
                 @@p2_choices.push(@@move.to_i)
             end
+            @@move = false
             checkWinner
             checkTie
-            @@move = false
             @@currentPlayer = @@currentPlayer == @p1 ? @p2 : @p1
         end
         if @winner == @p1
@@ -89,14 +89,14 @@ class Game
             [1, 2, 3],
             [4, 5, 6],
             [7, 8, 9],
-            [0, 3, 6],
+            [3, 6, 9],
             [1, 4, 7],
             [2, 5, 8],
             [1, 5, 9],
-            [3, 5, 7]
+            [3, 5, 7],
         ]
         if @@currentPlayer == @p1
-            @@p1_choices.sort
+            @@p1_choices = @@p1_choices.sort
             winning_combos.each do |lst|
                 match = @@p1_choices & lst
                 if match == lst
@@ -105,7 +105,7 @@ class Game
                 end
             end
         else
-            @@p2_choices.sort
+            @@p2_choices = @@p2_choices.sort
             winning_combos.each do |lst|
                 match = @@p2_choices & lst
                 if match == lst
